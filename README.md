@@ -2,6 +2,8 @@ Projekt-24-Java
 ===============
 
 Project no. 24 in Java
+"Aplikacja desktopowa do rozliczania wyjazdów"
+"Desktop aplication to settle businnes travels"
 
 
 Our planned steps in the project:
