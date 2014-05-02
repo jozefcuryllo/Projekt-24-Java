@@ -13,7 +13,13 @@ public class General {
 		  EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MyFrame();
+            	try {
+					MyFrame window = new MyFrame();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
             }
         });
 

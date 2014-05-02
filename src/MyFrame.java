@@ -1,22 +1,26 @@
 import javax.swing.JFrame;
 
 
+public class MyFrame {
 
-/**
- * Generating main window
- *
- */
-public class MyFrame extends JFrame {
+	JFrame frame;
+
+
 
 	/**
-	 * constructor
-	 * set window visible etc.
-	 * 
+	 * Create the application.
 	 */
 	public MyFrame() {
-	        super("Hello World");
-	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        setVisible(true);
-	    }
-	
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame("Business Travel Helper");
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
 }
