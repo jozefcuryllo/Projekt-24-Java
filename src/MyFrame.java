@@ -6,6 +6,7 @@ import javax.swing.JFrame;
  * Generating main window
  *
  */
+@SuppressWarnings("serial")
 public class MyFrame extends JFrame {
 
 	/**
@@ -18,5 +19,5 @@ public class MyFrame extends JFrame {
 	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        setVisible(true);
 	    }
-	
+
 }

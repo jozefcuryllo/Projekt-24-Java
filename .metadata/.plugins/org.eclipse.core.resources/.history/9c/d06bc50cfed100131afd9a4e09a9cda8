@@ -1,0 +1,23 @@
+import javax.swing.JFrame;
+
+
+
+/**
+ * Generating main window
+ *
+ */
+@SuppressWarnings("serial")
+public class MFrame extends JFrame {
+
+	/**
+	 * constructor
+	 * set window visible etc.
+	 * 
+	 */
+	public MFrame() {
+	        super("Hello World");
+	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        setVisible(true);
+	    }
+
+}
