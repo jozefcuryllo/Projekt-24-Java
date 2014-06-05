@@ -40,7 +40,13 @@ public class Podroze {
 	public String getNazwa_miejsc(){
 		return nazwa_miejsc;
 	}
-	public void Sr_transportu(String sr_transportu){
+	public void setNazwa(String nazwa_miejsc){
+		this.nazwa_miejsc=nazwa_miejsc;
+	}
+	public String getSr_transportu(){
+		return sr_transportu;
+	}
+	public void setSr_transportu(String sr_transportu){
 		this.sr_transportu=sr_transportu;
 	}
 	public String getGodzina(){
