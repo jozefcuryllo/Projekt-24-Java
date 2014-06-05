@@ -1,5 +1,9 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -62,12 +66,25 @@ public class PanelFactory {
 		
 		JCheckBox chckbxPaid_5 = new JCheckBox("Paid");
 		
+		JButton btnUpdate = new JButton("Update");
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				// tutaj akcja na przycisk Save
+				
+				
+				
+			}
+		});
+		
+		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(24)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblKosztyDojazdu)
@@ -101,7 +118,9 @@ public class PanelFactory {
 								.addComponent(lblTotal)
 								.addComponent(lblstJanuary))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(label)))
+							.addComponent(label)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(btnUpdate)))
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
@@ -142,11 +161,16 @@ public class PanelFactory {
 							.addComponent(lblLiving)
 							.addGap(18)
 							.addComponent(lblOther)))
-					.addGap(18)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblTotal)
-						.addComponent(label))
-					.addGap(37))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(18)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblTotal)
+								.addComponent(label)))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnUpdate)))
+					.addGap(46))
 		);
 		panel.setLayout(gl_panel);
 		
