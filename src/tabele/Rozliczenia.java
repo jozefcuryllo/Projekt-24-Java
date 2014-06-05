@@ -6,7 +6,6 @@ public class Rozliczenia {
 	public double p_hotel;
 	public double p_travel;
 	public double p_living;
-	public double p_b_prices;
 	public double p_other;
 	
 	public int getId(){
@@ -38,12 +37,6 @@ public class Rozliczenia {
 	}
 	public void setPLiving(int p_living){
 		this.p_living=p_living;
-	}
-	public double getBPrices(){
-		return p_b_prices;
-	}
-	public void setBPrices(int p_b_prices){
-		this.p_b_prices=p_b_prices;
 	}
 	public double getPOther(){
 		return p_other;
