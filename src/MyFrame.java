@@ -32,7 +32,7 @@ public class MyFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame("Business Travel Helper");
+		frame = new JFrame("Travel Helper");
 		frame.setBounds(100, 100, 770, 647);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		

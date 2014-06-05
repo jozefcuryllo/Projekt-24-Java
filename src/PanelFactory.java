@@ -64,8 +64,6 @@ public class PanelFactory {
 		
 		JCheckBox chckbxPaid_3 = new JCheckBox("Paid");
 		
-		JCheckBox chckbxPaid_4 = new JCheckBox("Paid");
-		
 		JCheckBox chckbxPaid_5 = new JCheckBox("Paid");
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
@@ -78,7 +76,6 @@ public class PanelFactory {
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblBusinessPrices)
 										.addComponent(lblKosztyDojazdu)
 										.addComponent(lblFood)
 										.addComponent(lblHotel)
@@ -103,7 +100,6 @@ public class PanelFactory {
 												.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 											.addGap(21)
 											.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-												.addComponent(chckbxPaid_4)
 												.addComponent(chckbxPaid_3)
 												.addComponent(chckbxPaid_5)))))
 								.addComponent(lblstJanuary))
@@ -147,9 +143,7 @@ public class PanelFactory {
 									.addComponent(lblLiving)))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(chckbxPaid_4)
-								.addComponent(lblBusinessPrices)))
+								.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(chckbxPaid)
 							.addGap(70)
