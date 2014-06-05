@@ -54,4 +54,8 @@ public class Rozliczenia {
 	public void setPOther(int p_other){
 		this.p_other=p_other;
 	}
+	
+    public String toString() {
+        return "["+id_rozl+"] -  "+p_food+" "+p_hotel+" "+p_travel +" " +p_living+" " +p_other;
+    }
 }

@@ -1,16 +1,16 @@
 package tabele;
-import java.util.*;
+
 
 public class Podroze {
 	private int id_podr;
 	private int id_rozl;
-	private Date data;
+	private String data;
 	private String nazwa_miejsc;
 	private String sr_transportu;
 	private String godzina;
 	
 	public Podroze(){}
-	public Podroze(int id_podr,int id_rozl,Date data,String nazwa_miejsc,String sr_transportu,String godzina){
+	public Podroze(int id_podr,int id_rozl, String data, String nazwa_miejsc,String sr_transportu,String godzina){
 		this.id_podr=id_podr;
 		this.id_rozl=id_rozl;
 		this.data=data;
@@ -31,10 +31,10 @@ public class Podroze {
 	public void setId_rozl(int id_rozl){
 		this.id_rozl=id_rozl;
 	}
-	public Date getData(){
+	public String getData(){
 		return data;
 	}
-	public void setData(Date data){
+	public void setData(String data){
 		this.data=data;
 	}
 	public String getNazwa_miejsc(){
@@ -55,4 +55,8 @@ public class Podroze {
 	public void setGodzina(String godzina){
 		this.godzina=godzina;
 	}
+    public String toString() {
+        return "["+id_podr+"] - ["+id_rozl+"] -  "+data+" "+nazwa_miejsc+" "+sr_transportu +" " +godzina;
+    }
+
 }

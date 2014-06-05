@@ -1,5 +1,9 @@
 import java.awt.EventQueue;
+import java.util.List;
 
+import baza.BazaDanych;
+import tabele.Podroze;
+import tabele.Rozliczenia;
 
 public class General {
 
@@ -26,5 +30,21 @@ public class General {
 
 
 	}
+	/*BazaDanych b = new BazaDanych();
+    b.insertPodroze(1, "2014/05/06", "Busko", "Samochod", "13:00");
 
+    List<Podroze> podroz = b.selectPodroze();
+
+
+    for(Podroze c: podroz)
+        System.out.println(c);
+
+
+    b.closeConnection();
+
+
+
+
+}*/
+	
 }
