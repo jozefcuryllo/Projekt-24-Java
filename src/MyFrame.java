@@ -58,7 +58,7 @@ public class MyFrame {
 		mnFile.add(mntmExit);
 		
 		mntmExit.addActionListener(new ActionListener() {
-			@Override
+			//@Override
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
 			}
@@ -73,7 +73,7 @@ public class MyFrame {
 		mnHelp.add(mntmHelp);
 		
 		mntmHelp.addActionListener(new ActionListener() {
-			@Override
+			//@Override
 			public void actionPerformed(ActionEvent arg0) {
 				HelpWindow dialog = new HelpWindow();
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -89,7 +89,7 @@ public class MyFrame {
 		mnHelp.add(mntmAbout);
 		
 		mntmAbout.addActionListener(new ActionListener() {
-			@Override
+			//@Override
 			public void actionPerformed(ActionEvent arg0) {
 				AboutWindow dialog = new AboutWindow();
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

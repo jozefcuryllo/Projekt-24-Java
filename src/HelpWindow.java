@@ -46,7 +46,7 @@ public class HelpWindow extends JDialog {
 					}
 				}
 				okButton.addActionListener(new ActionListener() {
-					@Override
+					//@Override
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();
 					}

@@ -48,7 +48,7 @@ public class AboutWindow extends JDialog {
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 				okButton.addActionListener(new ActionListener() {
-					@Override
+					//@Override
 					public void actionPerformed(ActionEvent arg0) {
 						//HelpWindow.setVisible(false);
 						dispose();
