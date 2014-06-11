@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
  
+import tabele.Data;
 import tabele.Rozliczenia;
 import tabele.Podroze;
 
@@ -39,11 +40,13 @@ public class BazaDanych {
  
 	
     public boolean createTables()  {
-        String createPodroze = "CREATE TABLE IF NOT EXISTS PODROZE (id_podr INTEGER PRIMARY KEY AUTOINCREMENT, id_rozl INTEGER, data varchar(11), nazwa_miejsc varchar(255), sr_transportu varchar(255), godzina varchar(255) )";
+        String createPodroze = "CREATE TABLE IF NOT EXISTS PODROZE (id_podr INTEGER PRIMARY KEY AUTOINCREMENT, id_rozl INTEGER, id_data INTEGER, nazwa_miejsc varchar(255), sr_transportu varchar(255), godzina varchar(255) )";
         String createRozliczenia = "CREATE TABLE IF NOT EXISTS ROZLICZENIA (id_rozl INTEGER PRIMARY KEY AUTOINCREMENT, p_food DOUBLE, p_hotel DOUBLE, p_travel DOUBLE, p_living DOUBLE, p_other DOUBLE)";
+        String createData = "CREATE TABLE IF NOT EXISTS DATA (id_daty INTEGER PRIMARY KEY AUTOINCREMENT, id_podr INTEGER, dzien INTEGER, miesiac INTEGER, rok INTEGER)";      
         try {
             stat.execute(createPodroze);
             stat.execute(createRozliczenia);
+            stat.execute(createData);
         } catch (SQLException e) {
             System.err.println("Blad przy tworzeniu tabeli");
             e.printStackTrace();
@@ -52,12 +55,12 @@ public class BazaDanych {
         return true;
     }
  
-    public boolean insertPodroze(int id_rozl, String data, String nazwa_miejsc, String sr_transportu, String godzina) {
+    public boolean insertPodroze(int id_rozl, int id_data, String nazwa_miejsc, String sr_transportu, String godzina) {
         try {
             PreparedStatement prepStmt = conn.prepareStatement(
                     "insert into PODROZE values (NULL, ?, ?, ?, ?, ?);");
             prepStmt.setInt(1, id_rozl);
-            prepStmt.setString(2, data);
+            prepStmt.setInt(2, id_data);
             prepStmt.setString(3, nazwa_miejsc);
             prepStmt.setString(4, sr_transportu);
             prepStmt.setString(5, godzina);
@@ -86,6 +89,22 @@ public class BazaDanych {
         }
         return true;
     }
+    
+    public boolean insertData(int id_podr, int dzien, int miesiac, int rok) {
+        try {
+            PreparedStatement prepStmt = conn.prepareStatement(
+                    "insert into DATA values (NULL, ?, ?, ?, ?);");
+            prepStmt.setInt(1, id_podr);
+            prepStmt.setInt(2, dzien);
+            prepStmt.setInt(3, miesiac);
+            prepStmt.setInt(4, rok);
+            prepStmt.execute();
+        } catch (SQLException e) {
+            System.err.println("Blad przy wstawianiu DATY");
+            return false;
+        }
+        return true;
+    }
  
  
     public List<Podroze> selectPodroze() {
@@ -94,18 +113,18 @@ public class BazaDanych {
             ResultSet result = stat.executeQuery("SELECT * FROM PODROZE");
             int id_podr;
             int id_rozl;
-            String data;
+            int id_data;
             String nazwa_miejsc;
             String sr_transportu;
             String godzina;
             while(result.next()) {
             		id_podr = result.getInt("id_podr");
             		id_rozl = result.getInt("id_rozl");
-            		data = result.getString("data");
+            		id_data = result.getInt("id_data");
             		nazwa_miejsc = result.getString("nazwa_miejsc");
             		sr_transportu = result.getString("sr_transportu");
             		godzina = result.getString("godzina");
-                podroz.add(new Podroze(id_podr,id_rozl,data,nazwa_miejsc,sr_transportu,godzina));
+                podroz.add(new Podroze(id_podr,id_rozl,id_data,nazwa_miejsc,sr_transportu,godzina));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -138,6 +157,30 @@ public class BazaDanych {
             return null;
         }
         return rozlicz;
+}
+    
+    public List<Data> selectData() {
+        List<Data> datta = new LinkedList<Data>();
+        try {
+            ResultSet result = stat.executeQuery("SELECT * FROM DATA");
+        	int id_podr;
+        	int id_daty;
+        	int dzien;
+        	int miesiac;
+        	int rok;
+            while(result.next()) {
+            	id_daty = result.getInt("id_daty");
+            	id_podr = result.getInt("id_podr");     	
+            	dzien = result.getInt("dzien");
+            	miesiac = result.getInt("miesiac");
+            	rok = result.getInt("rok");;
+                datta.add(new Data(id_daty, id_podr, dzien, miesiac, rok));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return datta;
 }
  
     public void closeConnection() {

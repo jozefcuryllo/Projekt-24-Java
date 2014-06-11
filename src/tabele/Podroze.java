@@ -4,16 +4,16 @@ package tabele;
 public class Podroze {
 	private int id_podr;
 	private int id_rozl;
-	private String data;
+	private int id_data;
 	private String nazwa_miejsc;
 	private String sr_transportu;
 	private String godzina;
 	
 	public Podroze(){}
-	public Podroze(int id_podr,int id_rozl, String data, String nazwa_miejsc,String sr_transportu,String godzina){
+	public Podroze(int id_podr,int id_rozl, int id_data, String nazwa_miejsc,String sr_transportu,String godzina){
 		this.id_podr=id_podr;
 		this.id_rozl=id_rozl;
-		this.data=data;
+		this.id_data=id_data;
 		this.nazwa_miejsc=nazwa_miejsc;
 		this.sr_transportu=sr_transportu;
 		this.godzina=godzina;
@@ -31,11 +31,11 @@ public class Podroze {
 	public void setId_rozl(int id_rozl){
 		this.id_rozl=id_rozl;
 	}
-	public String getData(){
-		return data;
+	public int getData(){
+		return id_data;
 	}
-	public void setData(String data){
-		this.data=data;
+	public void setData(int id_data){
+		this.id_data=id_data;
 	}
 	public String getNazwa_miejsc(){
 		return nazwa_miejsc;
@@ -56,7 +56,7 @@ public class Podroze {
 		this.godzina=godzina;
 	}
     public String toString() {
-        return "["+id_podr+"] - ["+id_rozl+"] -  "+data+" "+nazwa_miejsc+" "+sr_transportu +" " +godzina;
+        return "["+id_podr+"] - ["+id_rozl+"] - ["+id_data+"] "+nazwa_miejsc+" "+sr_transportu +" " +godzina;
     }
 
 }

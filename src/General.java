@@ -20,6 +20,7 @@ public class General {
             	try {
 					MyFrame window = new MyFrame();
 					window.frame.setVisible(true);
+					BazaDanych b = new BazaDanych();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
