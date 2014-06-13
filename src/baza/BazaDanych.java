@@ -40,9 +40,9 @@ public class BazaDanych {
  
 	
     public boolean createTables()  {
-        String createPodroze = "CREATE TABLE IF NOT EXISTS PODROZE (id_podr INTEGER PRIMARY KEY AUTOINCREMENT, id_rozl INTEGER, id_data INTEGER, nazwa_miejsc varchar(255), sr_transportu varchar(255), godzina varchar(255) )";
+        String createPodroze = "CREATE TABLE IF NOT EXISTS PODROZE (id_podr INTEGER PRIMARY KEY AUTOINCREMENT, id_rozl INTEGER, id_data INTEGER, nazwa_miejsc varchar(255), sr_transportu varchar(255), godzina varchar(255), FOREIGN KEY(id_rozl) REFERENCES ROZLICZENIA(id_rozl), FOREIGN KEY(id_data) REFERENCES DATA(id_daty) )";
         String createRozliczenia = "CREATE TABLE IF NOT EXISTS ROZLICZENIA (id_rozl INTEGER PRIMARY KEY AUTOINCREMENT, p_food DOUBLE, p_hotel DOUBLE, p_travel DOUBLE, p_living DOUBLE, p_other DOUBLE)";
-        String createData = "CREATE TABLE IF NOT EXISTS DATA (id_daty INTEGER PRIMARY KEY AUTOINCREMENT, id_podr INTEGER, dzien INTEGER, miesiac INTEGER, rok INTEGER)";      
+        String createData = "CREATE TABLE IF NOT EXISTS DATA (id_daty INTEGER PRIMARY KEY AUTOINCREMENT, dzien INTEGER, miesiac INTEGER, rok INTEGER)";      
         try {
             stat.execute(createPodroze);
             stat.execute(createRozliczenia);
@@ -90,14 +90,13 @@ public class BazaDanych {
         return true;
     }
     
-    public boolean insertData(int id_podr, int dzien, int miesiac, int rok) {
+    public boolean insertData(int dzien, int miesiac, int rok) {
         try {
             PreparedStatement prepStmt = conn.prepareStatement(
-                    "insert into DATA values (NULL, ?, ?, ?, ?);");
-            prepStmt.setInt(1, id_podr);
-            prepStmt.setInt(2, dzien);
-            prepStmt.setInt(3, miesiac);
-            prepStmt.setInt(4, rok);
+                    "insert into DATA values (NULL, ?, ?, ?);");
+            prepStmt.setInt(1, dzien);
+            prepStmt.setInt(2, miesiac);
+            prepStmt.setInt(3, rok);
             prepStmt.execute();
         } catch (SQLException e) {
             System.err.println("Blad przy wstawianiu DATY");
@@ -163,18 +162,16 @@ public class BazaDanych {
         List<Data> datta = new LinkedList<Data>();
         try {
             ResultSet result = stat.executeQuery("SELECT * FROM DATA");
-        	int id_podr;
         	int id_daty;
         	int dzien;
         	int miesiac;
         	int rok;
             while(result.next()) {
-            	id_daty = result.getInt("id_daty");
-            	id_podr = result.getInt("id_podr");     	
+            	id_daty = result.getInt("id_daty");    	
             	dzien = result.getInt("dzien");
             	miesiac = result.getInt("miesiac");
             	rok = result.getInt("rok");;
-                datta.add(new Data(id_daty, id_podr, dzien, miesiac, rok));
+                datta.add(new Data(id_daty, dzien, miesiac, rok));
             }
         } catch (SQLException e) {
             e.printStackTrace();

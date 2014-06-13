@@ -12,18 +12,19 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import tabele.Podroze;
+import tabele.Rozliczenia;
 
 import baza.BazaDanych;
 
 
 public class PanelFactory {
 
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_5;
-	
+	JTextField textField;
+	//JTextField textField_1;
+	//private JTextField textField_2;
+	//private JTextField textField_3;
+	//private JTextField textField_5;
+	private double suma = 0.0;
 	public JPanel producePanel(){
 		
 		JPanel panel = new JPanel();
@@ -39,26 +40,26 @@ public class PanelFactory {
 		JLabel lblLiving = new JLabel("Living");
 		
 		
-		textField = new JTextField();
+		final JTextField textField = new JTextField("0");
 		textField.setColumns(10);
 		
-		textField_1 = new JTextField();
+		final JTextField textField_1 = new JTextField("0");
 		textField_1.setColumns(10);
 		
-		textField_2 = new JTextField();
+		final JTextField textField_2 = new JTextField("0");
 		textField_2.setColumns(10);
 		
-		textField_3 = new JTextField();
+		final JTextField textField_3 = new JTextField("0");
 		textField_3.setColumns(10);
 	
 		
 		JLabel lblTotal = new JLabel("Total:  ");
 		
-		final JLabel label = new JLabel("999.98$");
+		final JLabel label = new JLabel("0$");
 		
 		JLabel lblOther = new JLabel("Other");
 		
-		textField_5 = new JTextField();
+		final JTextField textField_5 = new JTextField("0");
 		textField_5.setColumns(10);
 		
 		JCheckBox chckbxPaid = new JCheckBox("Paid");
@@ -71,18 +72,86 @@ public class PanelFactory {
 		
 		JCheckBox chckbxPaid_5 = new JCheckBox("Paid");
 		
+		textField.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				suma = suma + Double.parseDouble(textField.getText());  //te wszystkie action listenery sa pic na wode
+				label.setText(suma+" $");						//trzeba je poprawic bo reaguja na enter tylko
+			}													//i dolar sie nie pojawia no i dodaje ciagle ta sume
+																//nawet jak zmienimy jakas wartosc...
+		});
+		textField_1.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				suma = suma + Double.parseDouble(textField_1.getText());
+				label.setText(suma+" $");
+				
+			}
+			
+		});
+		textField_2.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				suma = suma + Double.parseDouble(textField_2.getText());
+				label.setText(suma+" $");
+			}
+			
+		});
+		textField_3.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				suma = suma + Double.parseDouble(textField_3.getText());
+				label.setText(suma+" $");
+			}
+			
+		});
+		textField_5.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				suma = suma + Double.parseDouble(textField_5.getText());
+				label.setText(suma+" $");
+			}
+			
+		});
+		
 		JButton btnUpdate = new JButton("Update");
 		btnUpdate.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
+				double food,hotel,living,other,travel;
+				
+				if(textField.getText().isEmpty())
+					food=0.0;
+				else
+					food = Double.parseDouble(textField.getText());  
+				if(textField_1.getText().isEmpty())
+					hotel=0.0;
+				else
+					hotel = Double.parseDouble(textField_1.getText());
+				if(textField_2.getText().isEmpty())
+					living=0.0;
+				else
+					living = Double.parseDouble(textField_2.getText());
+				if(textField_3.getText().isEmpty())
+					travel=0.0;
+				else
+					travel = Double.parseDouble(textField_3.getText());
+				if(textField_5.getText().isEmpty())
+					other=0.0;
+				else
+					other = Double.parseDouble(textField_5.getText());
+				
+				BazaDanych b = new BazaDanych();
+			    b.insertRozliczenia(food, hotel, living, travel, other);
 
+			    List<Rozliczenia> rozliczenia = b.selectRozliczenia();
+
+			    for(Rozliczenia c: rozliczenia)
+			        System.out.println(c);
 
 				// tutaj akcja na przycisk Save
 				
-				
+				b.closeConnection();
 				
 			}
 		});
+		
+		
 		
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
