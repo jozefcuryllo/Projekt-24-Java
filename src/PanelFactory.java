@@ -19,11 +19,11 @@ import baza.BazaDanych;
 
 public class PanelFactory {
 
-	JTextField textField;
-	//JTextField textField_1;
-	//private JTextField textField_2;
-	//private JTextField textField_3;
-	//private JTextField textField_5;
+	//JTextField textFieldTravelPrices;
+	//JTextField textFieldFood;
+	//private JTextField textFieldHotel;
+	//private JTextField textFieldLiving;
+	//private JTextField textFieldOther;
 	private double suma = 0.0;
 	public JPanel producePanel(){
 		
@@ -40,17 +40,17 @@ public class PanelFactory {
 		JLabel lblLiving = new JLabel("Living");
 		
 		
-		final JTextField textField = new JTextField("0");
-		textField.setColumns(10);
+		final JTextField textFieldTravelPrices = new JTextField("0");
+		textFieldTravelPrices.setColumns(10);
 		
-		final JTextField textField_1 = new JTextField("0");
-		textField_1.setColumns(10);
+		final JTextField textFieldFood = new JTextField("0");
+		textFieldFood.setColumns(10);
 		
-		final JTextField textField_2 = new JTextField("0");
-		textField_2.setColumns(10);
+		final JTextField textFieldHotel = new JTextField("0");
+		textFieldHotel.setColumns(10);
 		
-		final JTextField textField_3 = new JTextField("0");
-		textField_3.setColumns(10);
+		final JTextField textFieldLiving = new JTextField("0");
+		textFieldLiving.setColumns(10);
 	
 		
 		JLabel lblTotal = new JLabel("Total:  ");
@@ -59,51 +59,51 @@ public class PanelFactory {
 		
 		JLabel lblOther = new JLabel("Other");
 		
-		final JTextField textField_5 = new JTextField("0");
-		textField_5.setColumns(10);
+		final JTextField textFieldOther = new JTextField("0");
+		textFieldOther.setColumns(10);
 		
-		JCheckBox chckbxPaid = new JCheckBox("Paid");
+		JCheckBox chckbxTravelPrices = new JCheckBox("Paid");
 		
-		JCheckBox chckbxPaid_1 = new JCheckBox("Paid");
+		JCheckBox chckbxFood = new JCheckBox("Paid");
 		
-		JCheckBox chckbxPaid_2 = new JCheckBox("Paid");
+		JCheckBox chckbxHotel = new JCheckBox("Paid");
 		
-		JCheckBox chckbxPaid_3 = new JCheckBox("Paid");
+		JCheckBox chckbxLiving = new JCheckBox("Paid");
 		
-		JCheckBox chckbxPaid_5 = new JCheckBox("Paid");
+		JCheckBox chckbxOther = new JCheckBox("Paid");
 		
-		textField.addActionListener(new ActionListener(){
+		textFieldTravelPrices.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				suma = suma + Double.parseDouble(textField.getText());  //te wszystkie action listenery sa pic na wode
+				suma = suma + Double.parseDouble(textFieldTravelPrices.getText());  //te wszystkie action listenery sa pic na wode
 				label.setText(suma+" $");						//trzeba je poprawic bo reaguja na enter tylko
 			}													//i dolar sie nie pojawia no i dodaje ciagle ta sume
 																//nawet jak zmienimy jakas wartosc...
 		});
-		textField_1.addActionListener(new ActionListener(){
+		textFieldFood.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				suma = suma + Double.parseDouble(textField_1.getText());
+				suma = suma + Double.parseDouble(textFieldFood.getText());
 				label.setText(suma+" $");
 				
 			}
 			
 		});
-		textField_2.addActionListener(new ActionListener(){
+		textFieldHotel.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				suma = suma + Double.parseDouble(textField_2.getText());
+				suma = suma + Double.parseDouble(textFieldHotel.getText());
 				label.setText(suma+" $");
 			}
 			
 		});
-		textField_3.addActionListener(new ActionListener(){
+		textFieldLiving.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				suma = suma + Double.parseDouble(textField_3.getText());
+				suma = suma + Double.parseDouble(textFieldLiving.getText());
 				label.setText(suma+" $");
 			}
 			
 		});
-		textField_5.addActionListener(new ActionListener(){
+		textFieldOther.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				suma = suma + Double.parseDouble(textField_5.getText());
+				suma = suma + Double.parseDouble(textFieldOther.getText());
 				label.setText(suma+" $");
 			}
 			
@@ -115,26 +115,26 @@ public class PanelFactory {
 			public void actionPerformed(ActionEvent arg0) {
 				double food,hotel,living,other,travel;
 				
-				if(textField.getText().isEmpty())
+				if(textFieldTravelPrices.getText().isEmpty())
 					food=0.0;
 				else
-					food = Double.parseDouble(textField.getText());  
-				if(textField_1.getText().isEmpty())
+					food = Double.parseDouble(textFieldTravelPrices.getText());  
+				if(textFieldFood.getText().isEmpty())
 					hotel=0.0;
 				else
-					hotel = Double.parseDouble(textField_1.getText());
-				if(textField_2.getText().isEmpty())
+					hotel = Double.parseDouble(textFieldFood.getText());
+				if(textFieldHotel.getText().isEmpty())
 					living=0.0;
 				else
-					living = Double.parseDouble(textField_2.getText());
-				if(textField_3.getText().isEmpty())
+					living = Double.parseDouble(textFieldHotel.getText());
+				if(textFieldLiving.getText().isEmpty())
 					travel=0.0;
 				else
-					travel = Double.parseDouble(textField_3.getText());
-				if(textField_5.getText().isEmpty())
+					travel = Double.parseDouble(textFieldLiving.getText());
+				if(textFieldOther.getText().isEmpty())
 					other=0.0;
 				else
-					other = Double.parseDouble(textField_5.getText());
+					other = Double.parseDouble(textFieldOther.getText());
 				
 				BazaDanych b = new BazaDanych();
 			    b.insertRozliczenia(food, hotel, living, travel, other);
@@ -171,23 +171,23 @@ public class PanelFactory {
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(textFieldOther, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
-									.addComponent(chckbxPaid_5))
+									.addComponent(chckbxOther))
 								.addGroup(gl_panel.createSequentialGroup()
 									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-										.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addComponent(textFieldFood, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(textFieldTravelPrices, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(textFieldHotel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 									.addGap(18)
 									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-										.addComponent(chckbxPaid)
-										.addComponent(chckbxPaid_3)
-										.addComponent(chckbxPaid_1)))
+										.addComponent(chckbxTravelPrices)
+										.addComponent(chckbxLiving)
+										.addComponent(chckbxFood)))
 								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(textFieldLiving, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
-									.addComponent(chckbxPaid_2))))
+									.addComponent(chckbxHotel))))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 								.addComponent(lblTotal)
@@ -207,24 +207,24 @@ public class PanelFactory {
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(chckbxPaid))
+								.addComponent(textFieldTravelPrices, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(chckbxTravelPrices))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(chckbxPaid_3))
+								.addComponent(textFieldFood, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(chckbxLiving))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(chckbxPaid_1))
+								.addComponent(textFieldHotel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(chckbxFood))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(chckbxPaid_2))
+								.addComponent(textFieldLiving, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(chckbxHotel))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(chckbxPaid_5)))
+								.addComponent(textFieldOther, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(chckbxOther)))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblKosztyDojazdu)
