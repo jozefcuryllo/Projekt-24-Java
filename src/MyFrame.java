@@ -1,6 +1,8 @@
 import javax.swing.JFrame;
 import javax.swing.JToolBar;
 import java.awt.BorderLayout;
+import java.awt.ItemSelectable;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -10,6 +12,9 @@ import javax.swing.JComboBox;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
 import javax.swing.Box;
 import javax.swing.JDialog;
 import javax.swing.DefaultComboBoxModel;
@@ -27,10 +32,10 @@ public class MyFrame {
 	public MyFrame() {
 		initialize();
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
+		  
 	private void initialize() {
 		frame = new JFrame("Travel Helper");
 		frame.setBounds(100, 100, 770, 647);
@@ -105,6 +110,9 @@ public class MyFrame {
 		
 		JComboBox<Object> comboBox = new JComboBox<Object>();
 		comboBox.setModel(new DefaultComboBoxModel<Object>(new String[] {"2014", "2013", "2012", "2011", "2010", "2009"}));
+		
+
+	      
 		comboBox.setToolTipText("Choose a year");
 		toolBar.add(comboBox);
 		
@@ -122,7 +130,7 @@ public class MyFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
 		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
-		JPanel[] panel = new JPanel [31];
+		final JPanel[] panel = new JPanel [31];
 		PanelFactory fabryka = new PanelFactory();
 		
 
