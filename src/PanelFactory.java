@@ -27,7 +27,7 @@ public class PanelFactory {
 		
 		JPanel panel = new JPanel();
 		
-		JLabel lblstJanuary = new JLabel("1st January 2014");
+		//JLabel lblstJanuary = new JLabel("1st January 2014"); chyba mo¿na to wyrzuciæ bo trochê zaœmieca
 		
 		JLabel lblKosztyDojazdu = new JLabel("Travel prices");
 		
@@ -37,25 +37,40 @@ public class PanelFactory {
 		
 		JLabel lblLiving = new JLabel("Living");
 		
+		JLabel lblTime = new JLabel("Time");
 		
-		final JTextField textFieldTravelPrices = new JTextField("0");
-		textFieldTravelPrices.setColumns(10);
+		JLabel lblConveyance = new JLabel("Conveyance");
 		
-		final JTextField textFieldFood = new JTextField("0");
-		textFieldFood.setColumns(10);
-		
-		final JTextField textFieldHotel = new JTextField("0");
-		textFieldHotel.setColumns(10);
-		
-		final JTextField textFieldLiving = new JTextField("0");
-		textFieldLiving.setColumns(10);
-	
+		JLabel lblCity = new JLabel("City");
 		
 		JLabel lblTotal = new JLabel("Total:  ");
 		
 		final JLabel label = new JLabel("0$");
 		
 		JLabel lblOther = new JLabel("Other");
+		
+		final JTextField textFieldTravelPrices = new JTextField();
+		textFieldTravelPrices.setColumns(10);
+		
+		final JTextField textFieldFood = new JTextField();
+		textFieldFood.setColumns(10);
+		
+		final JTextField textFieldHotel = new JTextField();
+		textFieldHotel.setColumns(10);
+		
+		final JTextField textFieldLiving = new JTextField();
+		textFieldLiving.setColumns(10);
+	
+		final JTextField textFieldTime = new JTextField();
+		textFieldTime.setColumns(10);
+		
+		final JTextField textFieldConveyance = new JTextField();
+		textFieldConveyance.setColumns(10);
+		
+		final JTextField textFieldCity = new JTextField();
+		textFieldCity.setColumns(10);
+		
+
 		
 		final JTextField textFieldOther = new JTextField("0");
 		textFieldOther.setColumns(10);
@@ -148,12 +163,11 @@ public class PanelFactory {
 			    textFieldLiving.setText(String.valueOf(rozliczenia.get(0).getPLiving()));
 			    textFieldOther.setText(String.valueOf(rozliczenia.get(0).getPOther()));
 
-				// tutaj akcja na przycisk Save
-				
 				b.closeConnection();
 				
 			}
 		});
+		
 		
 		
 		
@@ -170,7 +184,10 @@ public class PanelFactory {
 								.addComponent(lblFood)
 								.addComponent(lblHotel)
 								.addComponent(lblLiving)
-								.addComponent(lblOther))
+								.addComponent(lblOther)
+								.addComponent(lblTime)
+								.addComponent(lblConveyance)
+								.addComponent(lblCity))
 							.addGap(30)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel.createSequentialGroup()
@@ -182,7 +199,10 @@ public class PanelFactory {
 									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 										.addComponent(textFieldFood, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addComponent(textFieldTravelPrices, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textFieldHotel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addComponent(textFieldHotel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(textFieldTime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(textFieldConveyance, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(textFieldCity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 									.addGap(18)
 									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 										.addComponent(chckbxTravelPrices)
@@ -193,21 +213,29 @@ public class PanelFactory {
 									.addGap(18)
 									.addComponent(chckbxHotel))))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblTotal)
-								.addComponent(lblstJanuary))
+							.addComponent(lblTotal)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(label)
 							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(btnUpdate)))
-					.addContainerGap())
+					.addContainerGap(134, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblstJanuary)
-					.addGap(39)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textFieldCity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblCity))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textFieldConveyance, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblConveyance))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textFieldTime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblTime))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
@@ -230,7 +258,6 @@ public class PanelFactory {
 								.addComponent(textFieldOther, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(chckbxOther)))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblKosztyDojazdu)
 							.addGap(18)
 							.addComponent(lblFood)
@@ -249,7 +276,7 @@ public class PanelFactory {
 						.addGroup(gl_panel.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(btnUpdate)))
-					.addGap(46))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 		

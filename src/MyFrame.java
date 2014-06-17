@@ -1,8 +1,6 @@
 import javax.swing.JFrame;
 import javax.swing.JToolBar;
 import java.awt.BorderLayout;
-import java.awt.ItemSelectable;
-
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -12,9 +10,6 @@ import javax.swing.JComboBox;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-
 import javax.swing.Box;
 import javax.swing.JDialog;
 import javax.swing.DefaultComboBoxModel;
@@ -38,7 +33,8 @@ public class MyFrame {
 		  
 	private void initialize() {
 		frame = new JFrame("Travel Helper");
-		frame.setBounds(100, 100, 770, 647);
+		frame.setResizable(false);
+		frame.setBounds(100, 100, 770, 678);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -47,18 +43,6 @@ public class MyFrame {
 		JMenu mnFile = new JMenu("File");
 		menuBar.add(mnFile);
 		
-		JMenuItem mntmNew = new JMenuItem("New");
-		mnFile.add(mntmNew);
-		
-		JMenuItem mntmOpen = new JMenuItem("Open");
-		mnFile.add(mntmOpen);
-		
-		JMenuItem mntmSave = new JMenuItem("Save");
-		mnFile.add(mntmSave);
-		
-		JMenuItem mntmPrint = new JMenuItem("Print");
-		mnFile.add(mntmPrint);
-		
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mnFile.add(mntmExit);
 		
@@ -66,6 +50,21 @@ public class MyFrame {
 			//@Override
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
+			}
+		});
+		
+		JMenu mnView = new JMenu("View");
+		menuBar.add(mnView);
+		
+		JMenuItem mntmNextTravel = new JMenuItem("Next travel");
+		mnView.add(mntmNextTravel);
+			
+		mntmNextTravel.addActionListener(new ActionListener() {
+			//@Override
+			public void actionPerformed(ActionEvent arg0) {
+				NextTravel dialog = new NextTravel();
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);	
 			}
 		});
 		

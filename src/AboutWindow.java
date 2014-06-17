@@ -50,7 +50,6 @@ public class AboutWindow extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					//@Override
 					public void actionPerformed(ActionEvent arg0) {
-						//HelpWindow.setVisible(false);
 						dispose();
 					}
 				});
