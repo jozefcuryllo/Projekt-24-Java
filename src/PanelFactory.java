@@ -1,5 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.GroupLayout;
@@ -49,6 +51,7 @@ public class PanelFactory {
 		JLabel lblOther = new JLabel("Other");
 		
 		final JTextField textFieldTravelPrices = new JTextField("0");
+		//textFieldTravelPrices.setEditable(false);
 		textFieldTravelPrices.setColumns(10);
 		
 		final JTextField textFieldFood = new JTextField("0");
@@ -84,39 +87,60 @@ public class PanelFactory {
 		
 		final JCheckBox chckbxOther = new JCheckBox("Paid");
 		
+	/*	chckbxTravelPrices.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent arg0){
+				if(chckbxTravelPrices.isEnabled()){
+				textFieldTravelPrices.setEditable(true);
+				}else{
+					textFieldTravelPrices.setEditable(false);	
+				}
+			}
+		});*/
 		textFieldTravelPrices.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				suma = suma + Double.parseDouble(textFieldTravelPrices.getText());  //te wszystkie action listenery sa pic na wode
-				label.setText(suma+" $");						//trzeba je poprawic bo reaguja na enter tylko
-			}													//i dolar sie nie pojawia no i dodaje ciagle ta sume
-																//nawet jak zmienimy jakas wartosc...
+				if(chckbxTravelPrices.isSelected()){
+				suma = Double.parseDouble(textFieldTravelPrices.getText()) + Double.parseDouble(textFieldFood.getText()) + Double.parseDouble(textFieldHotel.getText()) + Double.parseDouble(textFieldLiving.getText()) + Double.parseDouble(textFieldOther.getText());
+				label.setText(suma+" $");		
+				suma = 0.0;
+				}
+			}	
+			
 		});
 		textFieldFood.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				suma = suma + Double.parseDouble(textFieldFood.getText());
+				if(chckbxFood.isSelected()){
+				suma = Double.parseDouble(textFieldTravelPrices.getText()) + Double.parseDouble(textFieldFood.getText()) + Double.parseDouble(textFieldHotel.getText()) + Double.parseDouble(textFieldLiving.getText()) + Double.parseDouble(textFieldOther.getText());
 				label.setText(suma+" $");
+				suma = 0.0;
+				}
 				
 			}
 			
 		});
 		textFieldHotel.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				suma = suma + Double.parseDouble(textFieldHotel.getText());
+				if(chckbxHotel.isSelected())
+				suma = Double.parseDouble(textFieldTravelPrices.getText()) + Double.parseDouble(textFieldFood.getText()) + Double.parseDouble(textFieldHotel.getText()) + Double.parseDouble(textFieldLiving.getText()) + Double.parseDouble(textFieldOther.getText());
 				label.setText(suma+" $");
+				suma = 0.0;
 			}
 			
 		});
 		textFieldLiving.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				suma = suma + Double.parseDouble(textFieldLiving.getText());
+				if(chckbxLiving.isSelected())
+				suma = Double.parseDouble(textFieldTravelPrices.getText()) + Double.parseDouble(textFieldFood.getText()) + Double.parseDouble(textFieldHotel.getText()) + Double.parseDouble(textFieldLiving.getText()) + Double.parseDouble(textFieldOther.getText());
 				label.setText(suma+" $");
+				suma = 0.0;
 			}
 			
 		});
 		textFieldOther.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				suma = suma + Double.parseDouble(textFieldOther.getText());
+				if(chckbxOther.isSelected())
+				suma = Double.parseDouble(textFieldTravelPrices.getText()) + Double.parseDouble(textFieldFood.getText()) + Double.parseDouble(textFieldHotel.getText()) + Double.parseDouble(textFieldLiving.getText()) + Double.parseDouble(textFieldOther.getText());
 				label.setText(suma+" $");
+				suma = 0.0;
 			}
 			
 		});
