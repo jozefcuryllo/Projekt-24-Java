@@ -31,10 +31,10 @@ public class Podroze {
 	public void setId_rozl(int id_rozl){
 		this.id_rozl=id_rozl;
 	}
-	public int getData(){
+	public int getId_daty(){
 		return id_data;
 	}
-	public void setData(int id_data){
+	public void setId_daty(int id_data){
 		this.id_data=id_data;
 	}
 	public String getNazwa_miejsc(){

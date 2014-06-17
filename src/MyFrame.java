@@ -10,10 +10,19 @@ import javax.swing.JComboBox;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import javax.swing.Box;
 import javax.swing.JDialog;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
+
+import tabele.Data;
+import tabele.Podroze;
+import tabele.Rozliczenia;
+import baza.BazaDanych;
 
 
 public class MyFrame {
@@ -36,7 +45,7 @@ public class MyFrame {
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 770, 678);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
@@ -62,7 +71,60 @@ public class MyFrame {
 		mntmNextTravel.addActionListener(new ActionListener() {
 			//@Override
 			public void actionPerformed(ActionEvent arg0) {
-				NextTravel dialog = new NextTravel();
+				int dzien=0, mies=0, rok=0;
+				String trans = null, miejsc = null, godzina = null;
+				double kasa=0.0;
+				String datastr;
+				Date n = new Date();
+				long nwart = n.getTime();
+				Date t = null; 
+				SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+				long diff = nwart;
+				int id_dat=0;
+				int id_rozl=0;
+				BazaDanych b = new BazaDanych();
+				
+				
+				
+				List<Rozliczenia> rozliczenia = b.selectRozliczenia();
+				List<Podroze> podroze = b.selectPodroze();
+				List<Data> data = b.selectData();
+				
+				for(int i=0; i<data.size(); i++){
+					
+					datastr = String.valueOf(data.get(i).getRok())+'-'+String.valueOf(data.get(i).getMiesiac())+'-'+String.valueOf(data.get(i).getDzien());
+					
+					try { 
+				          t = ft.parse(datastr); 
+				      } catch (Exception e) { 
+				          System.out.println("Unparseable using " + ft); 
+				      }
+					
+					if((diff>(t.getTime() - nwart)) && ((t.getTime() - nwart)>=0)){
+					diff = t.getTime() - nwart;
+					id_dat = data.get(i).getId_daty();
+					dzien =data.get(i).getDzien();
+					mies = data.get(i).getMiesiac();
+					rok = data.get(i).getRok();
+					}					
+				}
+					
+				for (int p=0; p<podroze.size(); p++){
+					if(podroze.get(p).getId_daty() == id_dat){
+						id_rozl = podroze.get(p).getId_rozl();
+						trans = podroze.get(p).getSr_transportu();
+						godzina = podroze.get(p).getGodzina();
+						miejsc = podroze.get(p).getNazwa_miejsc();
+					}
+				}
+				
+				for (int k=0; k<rozliczenia.size(); k++){
+					if(rozliczenia.get(k).getId() == id_rozl){
+						kasa = rozliczenia.get(k).getPFood() + rozliczenia.get(k).getPHotel() + rozliczenia.get(k).getPLiving() + rozliczenia.get(k).getPOther() + rozliczenia.get(k).getPTravel();
+					}
+				}	
+				
+				NextTravel dialog = new NextTravel(dzien, mies, rok, trans, godzina, miejsc, kasa);
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setVisible(true);	
 			}

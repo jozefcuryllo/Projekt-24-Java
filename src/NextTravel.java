@@ -20,26 +20,8 @@ public class NextTravel extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					NextTravel frame = new NextTravel();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
-	public NextTravel() {
+	public NextTravel(int dzien, int mies, int rok, String trans, String godzina, String miejsc, double kasa){
 		setTitle("Next Travel");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 354, 224);
@@ -80,25 +62,25 @@ public class NextTravel extends JFrame {
 		JLabel lblNextTravelWill = new JLabel("Next travel will be:");
 		contentPane.add(lblNextTravelWill, "4, 4");
 		
-		JLabel lblDay = new JLabel("Day");
+		JLabel lblDay = new JLabel(String.valueOf(dzien));
 		contentPane.add(lblDay, "6, 4");
 		
-		JLabel lblMonth = new JLabel("Month");
+		JLabel lblMonth = new JLabel(String.valueOf(mies));
 		contentPane.add(lblMonth, "8, 4");
 		
-		JLabel lblYear = new JLabel("Year");
+		JLabel lblYear = new JLabel(String.valueOf(rok));
 		contentPane.add(lblYear, "10, 4");
 		
 		JLabel lblCity = new JLabel("City:");
 		contentPane.add(lblCity, "4, 6");
 		
-		JLabel lblWarsaw = new JLabel("Warsaw");
+		JLabel lblWarsaw = new JLabel(miejsc);
 		contentPane.add(lblWarsaw, "6, 6");
 		
 		JLabel lblConveyance = new JLabel("Conveyance:");
 		contentPane.add(lblConveyance, "4, 8");
 		
-		JLabel lblBusEtc = new JLabel("Bus etc.");
+		JLabel lblBusEtc = new JLabel(trans);
 		contentPane.add(lblBusEtc, "6, 8");
 		
 		JButton btnOk = new JButton("OK");
@@ -109,5 +91,10 @@ public class NextTravel extends JFrame {
 		});
 		contentPane.add(btnOk, "12, 14");
 	}
+
+
+
+
+
 
 }

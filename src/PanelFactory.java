@@ -13,14 +13,13 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import tabele.Podroze;
 import tabele.Rozliczenia;
+import tabele.Data;
 
 import baza.BazaDanych;
 
 
 public class PanelFactory {
 
-
-	public String rok;
 
 	private double suma = 0.0;
 	public JPanel producePanel(){
@@ -49,19 +48,19 @@ public class PanelFactory {
 		
 		JLabel lblOther = new JLabel("Other");
 		
-		final JTextField textFieldTravelPrices = new JTextField();
+		final JTextField textFieldTravelPrices = new JTextField("0");
 		textFieldTravelPrices.setColumns(10);
 		
-		final JTextField textFieldFood = new JTextField();
+		final JTextField textFieldFood = new JTextField("0");
 		textFieldFood.setColumns(10);
 		
-		final JTextField textFieldHotel = new JTextField();
+		final JTextField textFieldHotel = new JTextField("0");
 		textFieldHotel.setColumns(10);
 		
-		final JTextField textFieldLiving = new JTextField();
+		final JTextField textFieldLiving = new JTextField("0");
 		textFieldLiving.setColumns(10);
 	
-		final JTextField textFieldTime = new JTextField();
+		final JTextField textFieldTime = new JTextField("0");
 		textFieldTime.setColumns(10);
 		
 		final JTextField textFieldConveyance = new JTextField();
@@ -75,15 +74,15 @@ public class PanelFactory {
 		final JTextField textFieldOther = new JTextField("0");
 		textFieldOther.setColumns(10);
 		
-		JCheckBox chckbxTravelPrices = new JCheckBox("Paid");
+		final JCheckBox chckbxTravelPrices = new JCheckBox("Paid");
 		
-		JCheckBox chckbxFood = new JCheckBox("Paid");
+		final JCheckBox chckbxFood = new JCheckBox("Paid");
 		
-		JCheckBox chckbxHotel = new JCheckBox("Paid");
+		final JCheckBox chckbxHotel = new JCheckBox("Paid");
 		
-		JCheckBox chckbxLiving = new JCheckBox("Paid");
+		final JCheckBox chckbxLiving = new JCheckBox("Paid");
 		
-		JCheckBox chckbxOther = new JCheckBox("Paid");
+		final JCheckBox chckbxOther = new JCheckBox("Paid");
 		
 		textFieldTravelPrices.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
@@ -127,42 +126,76 @@ public class PanelFactory {
 
 			public void actionPerformed(ActionEvent arg0) {
 				double food,hotel,living,other,travel;
+				int dzien,miesiac,rok;
+				String nmiejsc, srtrans, godzina;
+				int id_rozli, id_dat, id_podr;
 				
-				if(textFieldTravelPrices.getText().isEmpty())
+				if((textFieldTravelPrices.getText().isEmpty()) && !(chckbxTravelPrices.isSelected()))
 					food=0.0;
 				else
 					food = Double.parseDouble(textFieldTravelPrices.getText());  
-				if(textFieldFood.getText().isEmpty())
+				
+				if((textFieldFood.getText().isEmpty()) && !(chckbxFood.isSelected()))
 					hotel=0.0;
 				else
 					hotel = Double.parseDouble(textFieldFood.getText());
-				if(textFieldHotel.getText().isEmpty())
+				
+				if((textFieldHotel.getText().isEmpty()) && !(chckbxHotel.isSelected()))
 					living=0.0;
 				else
 					living = Double.parseDouble(textFieldHotel.getText());
-				if(textFieldLiving.getText().isEmpty())
+				
+				if((textFieldLiving.getText().isEmpty()) && !(chckbxLiving.isSelected()))
 					travel=0.0;
 				else
 					travel = Double.parseDouble(textFieldLiving.getText());
-				if(textFieldOther.getText().isEmpty())
+				
+				if((textFieldOther.getText().isEmpty()) && !(chckbxOther.isSelected()))
 					other=0.0;
 				else
 					other = Double.parseDouble(textFieldOther.getText());
+				//=======================================================
+				if(textFieldCity.getText().isEmpty())
+					nmiejsc="Nie podano";
+				else
+					nmiejsc = textFieldCity.getText();
+				if(textFieldConveyance.getText().isEmpty())
+					srtrans="Nie podano";
+				else
+					srtrans = textFieldConveyance.getText();
+				if(textFieldTime.getText().isEmpty())
+					godzina="Nie podano";
+				else
+					godzina = textFieldTime.getText();
 				
 				BazaDanych b = new BazaDanych();
-			   // b.insertRozliczenia(food, hotel, living, travel, other);
-				// b.insertData(day,month,year);
-				// b.insertPodroze(id_rozl, id_data, nazwa_miejsc, sr_trans, godzina);
 				
-				//tutaj w insertPodroze id daty i id rozl trzeba wydobyc z dopiero co wsadzonych danych w insertData i insertRozliczenia
-			    List<Rozliczenia> rozliczenia = b.selectRozliczenia();
-			    
-			    textFieldTravelPrices.setText(String.valueOf(rozliczenia.get(0).getPTravel()));	    
-			    textFieldFood.setText(String.valueOf(rozliczenia.get(0).getPFood())); //to sa przykladowe ustawienia zeby pokazac jak wydowbywac dane z bazy
-			    textFieldHotel.setText(String.valueOf(rozliczenia.get(0).getPHotel()));
-			    textFieldLiving.setText(String.valueOf(rozliczenia.get(0).getPLiving()));
-			    textFieldOther.setText(String.valueOf(rozliczenia.get(0).getPOther()));
+				List<Rozliczenia> rozliczenia = b.selectRozliczenia();
+				List<Podroze> podroze = b.selectPodroze();
+				List<Data> data = b.selectData();
+				
+				b.insertRozliczenia(food, hotel, living, travel, other);
+				//DATA=======================
+				b.insertData(18,6,2014);
+				//DATA=======================   
+					id_podr=podroze.size();
+					if(id_podr==0){
+						id_rozli=1;
+						id_dat=1;
+					}else{
+					id_rozli = rozliczenia.get(rozliczenia.size()-1).getId()+1;
+					id_dat = data.get(data.size()-1).getId_daty()+1;
+					}
+			   b.insertPodroze(id_rozli, id_dat, nmiejsc, srtrans, godzina);
+				
 
+			    
+			  //  textFieldTravelPrices.setText(String.valueOf(rozliczenia.get(0).getPTravel()));	    
+			  //  textFieldFood.setText(String.valueOf(rozliczenia.get(0).getPFood())); //to sa przykladowe ustawienia zeby pokazac jak wydowbywac dane z bazy
+			  //  textFieldHotel.setText(String.valueOf(rozliczenia.get(0).getPHotel()));
+			  //  textFieldLiving.setText(String.valueOf(rozliczenia.get(0).getPLiving()));
+			  //  textFieldOther.setText(String.valueOf(rozliczenia.get(0).getPOther()));
+			    
 				b.closeConnection();
 				
 			}
