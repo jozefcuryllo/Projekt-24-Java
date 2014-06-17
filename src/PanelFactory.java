@@ -19,20 +19,9 @@ import baza.BazaDanych;
 
 public class PanelFactory {
 
-<<<<<<< HEAD
+
 	public String rok;
-	//JTextField textField;
-	//JTextField textField_1;
-	//private JTextField textField_2;
-	//private JTextField textField_3;
-	//private JTextField textField_5;
-=======
-	//JTextField textFieldTravelPrices;
-	//JTextField textFieldFood;
-	//private JTextField textFieldHotel;
-	//private JTextField textFieldLiving;
-	//private JTextField textFieldOther;
->>>>>>> origin/Baza-danych
+
 	private double suma = 0.0;
 	public JPanel producePanel(){
 		
@@ -153,11 +142,11 @@ public class PanelFactory {
 				//tutaj w insertPodroze id daty i id rozl trzeba wydobyc z dopiero co wsadzonych danych w insertData i insertRozliczenia
 			    List<Rozliczenia> rozliczenia = b.selectRozliczenia();
 			    
-			   textField.setText(String.valueOf(rozliczenia.get(0).getPTravel()));	    
-			    textField_1.setText(String.valueOf(rozliczenia.get(0).getPFood())); //to sa przykladowe ustawienia zeby pokazac jak wydowbywac dane z bazy
-			    textField_2.setText(String.valueOf(rozliczenia.get(0).getPHotel()));
-			    textField_3.setText(String.valueOf(rozliczenia.get(0).getPLiving()));
-			    textField_5.setText(String.valueOf(rozliczenia.get(0).getPOther()));
+			    textFieldTravelPrices.setText(String.valueOf(rozliczenia.get(0).getPTravel()));	    
+			    textFieldFood.setText(String.valueOf(rozliczenia.get(0).getPFood())); //to sa przykladowe ustawienia zeby pokazac jak wydowbywac dane z bazy
+			    textFieldHotel.setText(String.valueOf(rozliczenia.get(0).getPHotel()));
+			    textFieldLiving.setText(String.valueOf(rozliczenia.get(0).getPLiving()));
+			    textFieldOther.setText(String.valueOf(rozliczenia.get(0).getPOther()));
 
 				// tutaj akcja na przycisk Save
 				
