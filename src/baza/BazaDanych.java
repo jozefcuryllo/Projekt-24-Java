@@ -39,8 +39,8 @@ public class BazaDanych {
  
 	
     public boolean createTables()  {
-        String createPodroze = "CREATE TABLE IF NOT EXISTS PODROZE (id_podr INTEGER PRIMARY KEY AUTOINCREMENT, id_rozl INTEGER, data varchar(11), nazwa_miejsc varchar(255), sr_transportu varchar(255), godzina varchar(255) )";
-        String createRozliczenia = "CREATE TABLE IF NOT EXISTS ROZLICZENIA (id_rozl INTEGER PRIMARY KEY AUTOINCREMENT, p_food DOUBLE, p_hotel DOUBLE, p_travel DOUBLE, p_living DOUBLE, p_other DOUBLE)";
+        String createPodroze = "CREATE TABLE IF NOT EXISTS PODROZE (id_podr INTEGER PRIMARY KEY AUTOINCREMENT, data INTEGER,  data DATE, nazwa_miejsc varchar(255), sr_transportu varchar(255), godzina varchar(255))";
+        String createRozliczenia = "CREATE TABLE IF NOT EXISTS ROZLICZENIA (id_rozl INTEGER PRIMARY KEY AUTOINCREMENT, p_food DOUBLE, p_hotel DOUBLE, p_travel DOUBLE, p_living DOUBLE, p_other DOUBLE))";
         try {
             stat.execute(createPodroze);
             stat.execute(createRozliczenia);
@@ -52,12 +52,12 @@ public class BazaDanych {
         return true;
     }
  
-    public boolean insertPodroze(int id_rozl, String data, String nazwa_miejsc, String sr_transportu, String godzina) {
+    public boolean insertPodroze(int id_rozl, Date data, String nazwa_miejsc, String sr_transportu, String godzina) {
         try {
             PreparedStatement prepStmt = conn.prepareStatement(
                     "insert into PODROZE values (NULL, ?, ?, ?, ?, ?);");
             prepStmt.setInt(1, id_rozl);
-            prepStmt.setString(2, data);
+            prepStmt.setDate(2, (java.sql.Date) data);
             prepStmt.setString(3, nazwa_miejsc);
             prepStmt.setString(4, sr_transportu);
             prepStmt.setString(5, godzina);
@@ -94,14 +94,14 @@ public class BazaDanych {
             ResultSet result = stat.executeQuery("SELECT * FROM PODROZE");
             int id_podr;
             int id_rozl;
-            String data;
+            Date data;
             String nazwa_miejsc;
             String sr_transportu;
             String godzina;
             while(result.next()) {
             		id_podr = result.getInt("id_podr");
             		id_rozl = result.getInt("id_rozl");
-            		data = result.getString("data");
+            		data = result.getDate("data");
             		nazwa_miejsc = result.getString("nazwa_miejsc");
             		sr_transportu = result.getString("sr_transportu");
             		godzina = result.getString("godzina");
