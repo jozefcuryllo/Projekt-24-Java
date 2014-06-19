@@ -62,10 +62,10 @@ public class NextTravel extends JFrame {
 		JLabel lblNextTravelWill = new JLabel("Next travel will be:");
 		contentPane.add(lblNextTravelWill, "4, 4");
 		
-		JLabel lblDay = new JLabel(String.valueOf(dzien)+'/');
+		JLabel lblDay = new JLabel(String.valueOf(dzien));
 		contentPane.add(lblDay, "6, 4");
 		
-		JLabel lblMonth = new JLabel(String.valueOf(mies)+'/');
+		JLabel lblMonth = new JLabel(String.valueOf(mies));
 		contentPane.add(lblMonth, "8, 4");
 		
 		JLabel lblYear = new JLabel(String.valueOf(rok));
@@ -92,7 +92,7 @@ public class NextTravel extends JFrame {
 		JLabel lblCost = new JLabel("Cost:");
 		contentPane.add(lblCost, "4, 12");
 		
-		JLabel lblCostoftrip = new JLabel(String.valueOf(kasa));
+		JLabel lblCostoftrip = new JLabel(String.valueOf(kasa) + "$");
 		contentPane.add(lblCostoftrip, "6, 12");
 		
 		JButton btnOk = new JButton("OK");

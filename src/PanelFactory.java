@@ -1,5 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -24,19 +26,19 @@ public class PanelFactory {
 
 
 	private double suma = 0.0;
-	public JPanel producePanel(){
+	public JPanel producePanel(final int argdzien){
 		
 		JPanel panel = new JPanel();
 		
 		//JLabel lblstJanuary = new JLabel("1st January 2014"); chyba mo¿na to wyrzuciæ bo trochê zaœmieca
 		
-		JLabel lblKosztyDojazdu = new JLabel("Travel prices");
+		JLabel lblKosztyDojazdu = new JLabel("Travel prices($)");
 		
-		JLabel lblFood = new JLabel("Food");
+		JLabel lblFood = new JLabel("Food($)");
 		
-		JLabel lblHotel = new JLabel("Hotel");
+		JLabel lblHotel = new JLabel("Hotel($)");
 		
-		JLabel lblLiving = new JLabel("Living");
+		JLabel lblLiving = new JLabel("Living($)");
 		
 		JLabel lblTime = new JLabel("Time");
 		
@@ -44,26 +46,29 @@ public class PanelFactory {
 		
 		JLabel lblCity = new JLabel("City");
 		
-		JLabel lblTotal = new JLabel("Total:  ");
+		JLabel lblTotal = new JLabel("Total($):  ");
 		
-		final JLabel label = new JLabel("0$");
+		final JLabel label = new JLabel("0");
 		
-		JLabel lblOther = new JLabel("Other");
+		JLabel lblOther = new JLabel("Other($)");
 		
 		final JTextField textFieldTravelPrices = new JTextField("0");
-		//textFieldTravelPrices.setEditable(false);
+		textFieldTravelPrices.setEnabled(false);
 		textFieldTravelPrices.setColumns(10);
 		
 		final JTextField textFieldFood = new JTextField("0");
+		textFieldFood.setEnabled(false);
 		textFieldFood.setColumns(10);
 		
 		final JTextField textFieldHotel = new JTextField("0");
+		textFieldHotel.setEnabled(false);
 		textFieldHotel.setColumns(10);
 		
 		final JTextField textFieldLiving = new JTextField("0");
+		textFieldLiving.setEnabled(false);
 		textFieldLiving.setColumns(10);
 	
-		final JTextField textFieldTime = new JTextField("0");
+		final JTextField textFieldTime = new JTextField("00:00");
 		textFieldTime.setColumns(10);
 		
 		final JTextField textFieldConveyance = new JTextField();
@@ -75,6 +80,7 @@ public class PanelFactory {
 
 		
 		final JTextField textFieldOther = new JTextField("0");
+		textFieldOther.setEnabled(false);
 		textFieldOther.setColumns(10);
 		
 		final JCheckBox chckbxTravelPrices = new JCheckBox("Paid");
@@ -87,29 +93,88 @@ public class PanelFactory {
 		
 		final JCheckBox chckbxOther = new JCheckBox("Paid");
 		
-	/*	chckbxTravelPrices.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent arg0){
-				if(chckbxTravelPrices.isEnabled()){
-				textFieldTravelPrices.setEditable(true);
-				}else{
-					textFieldTravelPrices.setEditable(false);	
+	    chckbxTravelPrices.addItemListener(new ItemListener()
+        {
+            public void itemStateChanged(ItemEvent ie){
+            	textFieldTravelPrices.setEnabled(ie.getStateChange() == ItemEvent.SELECTED);
+            	if(chckbxTravelPrices.isEnabled()){
+            		textFieldTravelPrices.setText("");
+            	}else{
+            		textFieldTravelPrices.setText("0");
+            	}
 				}
 			}
-		});*/
-		textFieldTravelPrices.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
-				if(chckbxTravelPrices.isSelected()){
-				suma = Double.parseDouble(textFieldTravelPrices.getText()) + Double.parseDouble(textFieldFood.getText()) + Double.parseDouble(textFieldHotel.getText()) + Double.parseDouble(textFieldLiving.getText()) + Double.parseDouble(textFieldOther.getText());
+		);
+	    
+	    chckbxHotel.addItemListener(new ItemListener()
+        {
+            public void itemStateChanged(ItemEvent ie){
+            	textFieldLiving.setEnabled(ie.getStateChange() == ItemEvent.SELECTED);	
+            	if(chckbxHotel.isEnabled()){
+            		textFieldLiving.setText("");
+            	}else{
+            		textFieldLiving.setText("0");
+            	}
+				}
+			}
+		);
+	    
+	    chckbxLiving.addItemListener(new ItemListener()
+        {
+            public void itemStateChanged(ItemEvent ie){
+            	textFieldFood.setEnabled(ie.getStateChange() == ItemEvent.SELECTED);	
+            	if(chckbxLiving.isEnabled()){
+            		textFieldFood.setText("");
+            	}else{
+            		textFieldFood.setText("0");
+            	}
+				}
+			}
+		);
+	    
+	    chckbxFood.addItemListener(new ItemListener()
+        {
+            public void itemStateChanged(ItemEvent ie){
+            	textFieldHotel.setEnabled(ie.getStateChange() == ItemEvent.SELECTED);	
+            	if(chckbxFood.isEnabled()){
+            		textFieldHotel.setText("");
+            	}else{
+            		textFieldHotel.setText("0");
+            	}
+				}
+			}
+		);
+	    
+	    chckbxOther.addItemListener(new ItemListener()
+        {
+            public void itemStateChanged(ItemEvent ie){
+            	textFieldOther.setEnabled(ie.getStateChange() == ItemEvent.SELECTED);
+            	if(chckbxOther.isEnabled()){
+            		textFieldOther.setText("");
+            	}else{
+            		textFieldOther.setText("0");
+            	}
+				}
+			}
+		);
+		
+	    
+	    
+	    
+	    textFieldTravelPrices.addMouseListener(new MouseAdapter() { 
+	          public void mousePressed(MouseEvent me) { 
+				if((chckbxTravelPrices.isSelected())&&(textFieldTravelPrices.isEnabled())){
+					suma = GetSuma(textFieldTravelPrices.getText(),textFieldFood.getText(),textFieldHotel.getText(),textFieldLiving.getText(),textFieldOther.getText());
 				label.setText(suma+" $");		
 				suma = 0.0;
 				}
 			}	
 			
 		});
-		textFieldFood.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
-				if(chckbxFood.isSelected()){
-				suma = Double.parseDouble(textFieldTravelPrices.getText()) + Double.parseDouble(textFieldFood.getText()) + Double.parseDouble(textFieldHotel.getText()) + Double.parseDouble(textFieldLiving.getText()) + Double.parseDouble(textFieldOther.getText());
+		textFieldFood.addMouseListener(new MouseAdapter() { 
+	          public void mousePressed(MouseEvent me) { 
+				if((chckbxLiving.isSelected())&&(textFieldFood.isEnabled())){
+					suma = GetSuma(textFieldTravelPrices.getText(),textFieldFood.getText(),textFieldHotel.getText(),textFieldLiving.getText(),textFieldOther.getText());
 				label.setText(suma+" $");
 				suma = 0.0;
 				}
@@ -117,30 +182,33 @@ public class PanelFactory {
 			}
 			
 		});
-		textFieldHotel.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
-				if(chckbxHotel.isSelected())
-				suma = Double.parseDouble(textFieldTravelPrices.getText()) + Double.parseDouble(textFieldFood.getText()) + Double.parseDouble(textFieldHotel.getText()) + Double.parseDouble(textFieldLiving.getText()) + Double.parseDouble(textFieldOther.getText());
+		textFieldHotel.addMouseListener(new MouseAdapter() { 
+	          public void mousePressed(MouseEvent me) { 
+				if((chckbxFood.isSelected())&&(textFieldHotel.isEnabled())){
+					suma = GetSuma(textFieldTravelPrices.getText(),textFieldFood.getText(),textFieldHotel.getText(),textFieldLiving.getText(),textFieldOther.getText());
 				label.setText(suma+" $");
 				suma = 0.0;
+				}
 			}
 			
 		});
-		textFieldLiving.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
-				if(chckbxLiving.isSelected())
-				suma = Double.parseDouble(textFieldTravelPrices.getText()) + Double.parseDouble(textFieldFood.getText()) + Double.parseDouble(textFieldHotel.getText()) + Double.parseDouble(textFieldLiving.getText()) + Double.parseDouble(textFieldOther.getText());
+		textFieldLiving.addMouseListener(new MouseAdapter() { 
+	          public void mousePressed(MouseEvent me) { 
+				if((chckbxHotel.isSelected())&&(textFieldLiving.isEnabled())){
+					suma = GetSuma(textFieldTravelPrices.getText(),textFieldFood.getText(),textFieldHotel.getText(),textFieldLiving.getText(),textFieldOther.getText());
 				label.setText(suma+" $");
 				suma = 0.0;
+				}
 			}
 			
 		});
-		textFieldOther.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
-				if(chckbxOther.isSelected())
-				suma = Double.parseDouble(textFieldTravelPrices.getText()) + Double.parseDouble(textFieldFood.getText()) + Double.parseDouble(textFieldHotel.getText()) + Double.parseDouble(textFieldLiving.getText()) + Double.parseDouble(textFieldOther.getText());
+		textFieldOther.addMouseListener(new MouseAdapter() { 
+	          public void mousePressed(MouseEvent me) { 
+				if((chckbxOther.isSelected())&&(textFieldOther.isEnabled())){
+				suma = GetSuma(textFieldTravelPrices.getText(),textFieldFood.getText(),textFieldHotel.getText(),textFieldLiving.getText(),textFieldOther.getText());
 				label.setText(suma+" $");
 				suma = 0.0;
+				}
 			}
 			
 		});
@@ -150,7 +218,9 @@ public class PanelFactory {
 
 			public void actionPerformed(ActionEvent arg0) {
 				double food,hotel,living,other,travel;
-				int dzien,miesiac,rok;
+				int dzien=argdzien,
+				miesiac,
+				rok;
 				String nmiejsc, srtrans, godzina;
 				int id_rozli, id_dat, id_podr;
 				
@@ -200,7 +270,7 @@ public class PanelFactory {
 				
 				b.insertRozliczenia(food, hotel, living, travel, other);
 				//DATA=======================
-				b.insertData(18,6,2014);
+				b.insertData(argdzien,11,2014);
 				//DATA=======================   
 					id_podr=podroze.size();
 					if(id_podr==0){
@@ -344,5 +414,17 @@ public class PanelFactory {
 		
 	}
 	
-	
+	double GetSuma(String TP, String F, String H, String L, String O){
+		double suma=0;	
+		String tab[]={TP,F,H,L,O};
+		for(int i=0; i<5; i++){
+			if(tab[i].equals("")){
+				suma = suma + 0;
+			}else{
+				suma = suma + Double.parseDouble(tab[i]);
+			}
+		}
+
+		return suma;
+	}
 }

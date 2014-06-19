@@ -196,7 +196,7 @@ public class MyFrame {
 		
 
 		for (int i=0; i<31; i++){
-			panel[i] = fabryka.producePanel();
+			panel[i] = fabryka.producePanel(i+1);
 			tabbedPane.addTab( Integer.toString(i+1), null, panel[i], Integer.toString(i+1));
 		}
 		
