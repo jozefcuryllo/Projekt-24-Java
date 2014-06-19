@@ -217,6 +217,12 @@ public class PanelFactory {
 			
 		});
 		
+		final JComboBox<Object> comboBox = new JComboBox<Object>();
+		comboBox.setModel(new DefaultComboBoxModel<Object>(new String[] {"2014", "2015", "2016", "2017", "2018", "2019"}));
+		
+		final JComboBox<Object> comboBox_1 = new JComboBox<Object>();
+		comboBox_1.setModel(new DefaultComboBoxModel<Object>(new String[] {"Jan", "Feb", "Mar", "Apr", "May", "Jul", "Jun", "Sep", "Oct", "Nov", "Dec"}));
+		
 		JButton btnUpdate = new JButton("Update");
 		btnUpdate.addActionListener(new ActionListener() {
 
@@ -265,6 +271,13 @@ public class PanelFactory {
 					godzina="Nie podano";
 				else
 					godzina = textFieldTime.getText();
+				int temp;
+				
+				temp = comboBox_1.getSelectedIndex();
+				miesiac = temp + 1;
+				
+				temp = comboBox.getSelectedIndex();
+				rok = temp +2014;
 				
 				BazaDanych b = new BazaDanych();
 				
@@ -274,7 +287,7 @@ public class PanelFactory {
 				
 				b.insertRozliczenia(food, hotel, living, travel, other);
 				//DATA=======================
-				b.insertData(argdzien,11,2014);
+				b.insertData(argdzien, miesiac ,rok);
 				//DATA=======================   
 					id_podr=podroze.size();
 					if(id_podr==0){
@@ -303,11 +316,7 @@ public class PanelFactory {
 		
 		
 		
-		JComboBox<Object> comboBox = new JComboBox<Object>();
-		comboBox.setModel(new DefaultComboBoxModel<Object>(new String[] {"2014", "2013", "2012", "2011", "2010", "2009"}));
-		
-		JComboBox<Object> comboBox_1 = new JComboBox<Object>();
-		comboBox_1.setModel(new DefaultComboBoxModel<Object>(new String[] {"Jan", "Feb", "Mar", "Apr", "May", "Jul", "Jun", "Sep", "Oct", "Nov", "Dec"}));
+
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
