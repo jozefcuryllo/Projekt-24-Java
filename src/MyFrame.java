@@ -43,7 +43,7 @@ public class MyFrame {
 	private void initialize() {
 		frame = new JFrame("Travel Helper");
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 770, 678);
+		frame.setBounds(100, 100, 770, 651);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -162,31 +162,6 @@ public class MyFrame {
 				dialog.setVisible(true);	
 			}
 		});
-		
-		JToolBar toolBar = new JToolBar();
-		frame.getContentPane().add(toolBar, BorderLayout.NORTH);
-		
-		JLabel lblRok = new JLabel("Year  ");
-		toolBar.add(lblRok);
-		
-		JComboBox<Object> comboBox = new JComboBox<Object>();
-		comboBox.setModel(new DefaultComboBoxModel<Object>(new String[] {"2014", "2013", "2012", "2011", "2010", "2009"}));
-		
-
-	      
-		comboBox.setToolTipText("Choose a year");
-		toolBar.add(comboBox);
-		
-		Component verticalStrut = Box.createVerticalStrut(20);
-		toolBar.add(verticalStrut);
-		
-		JLabel lblMiesic = new JLabel("Month  ");
-		toolBar.add(lblMiesic);
-		
-		JComboBox<Object> comboBox_1 = new JComboBox<Object>();
-		comboBox_1.setModel(new DefaultComboBoxModel<Object>(new String[] {"January", "February", "March", "April", "May", "Juli", "Juni", "September", "Oktober", "November", "December"}));
-		comboBox_1.setToolTipText("Choose a month");
-		toolBar.add(comboBox_1);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
 		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
